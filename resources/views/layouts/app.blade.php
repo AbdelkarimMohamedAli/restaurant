@@ -53,7 +53,6 @@
 	<div id="app" class="app">
 		<!-- BEGIN #header -->
 		<div id="header" class="app-header">
-			@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 			<!-- BEGIN desktop-toggler -->
 			<div class="desktop-toggler">
 				<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
