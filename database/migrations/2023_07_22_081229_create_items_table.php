@@ -19,8 +19,9 @@ return new class extends Migration
             $table->decimal('price',10);
             $table->decimal('discount',8);
             $table->string('discount_type');
-            $table->text('addons');
-            $table->text('variant');
+            $table->json('addons')->default('');
+            $table->json('variant')->default('');
+            $table->json('matrials')->default('');
             $table->string('img');
             $table->text('description');
             $table->foreignId('user_id')->references('id')->on('users');

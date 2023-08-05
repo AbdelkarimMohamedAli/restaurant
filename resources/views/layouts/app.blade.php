@@ -11,7 +11,9 @@
 	<link href="assets/css/vendor.min.css" rel="stylesheet">
 	<link href="assets/css/app.min.css" rel="stylesheet">
 	<!-- ================== END core-css ================== -->
-	
+	<link href="assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet">
+	<link href="assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+	<link href="assets/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet">
 	<!-- ================== BEGIN page-css ================== -->
 	<link href="assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet">
 	<!-- ================== END page-css ================== -->
@@ -30,6 +32,19 @@
 		.trans{
 			transition: all 0.5s ease-in-out;
 		}
+		.addon-select-o{
+			transition: all 0.3s ease-in-out;
+			height: auto;
+			transform: scaleY(1);
+		}
+		.addon-select-c{
+			transition: all 0.3s ease-in-out;
+			height: 0;
+			transform: scaleY(0);
+		}
+		.z-100{
+			z-index: 999 !important;
+		}
     </style>
 	
 	<livewire:styles />
@@ -38,7 +53,7 @@
 	<div id="app" class="app">
 		<!-- BEGIN #header -->
 		<div id="header" class="app-header">
-					
+			@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 			<!-- BEGIN desktop-toggler -->
 			<div class="desktop-toggler">
 				<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
@@ -216,7 +231,7 @@
 						<div class="menu-img online">
 							<img src="assets/img/user/profile.jpg" alt="Profile" height="60">
 						</div>
-						<div class="menu-text d-sm-block d-none w-170px">{{Auth::user()->name}}</div>
+						<div class="menu-text d-sm-block d-none w-170px">{{Auth::user()->email}}</div>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
 						<a class="dropdown-item d-flex align-items-center" href="profile.html">PROFILE <i class="bi bi-person-circle ms-auto text-theme fs-16px my-n1"></i></a>
@@ -517,10 +532,23 @@
 <!-- ================== END core-js ================== -->
 
 <!-- ================== BEGIN page-js ================== -->
-<script src="assets/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-<script src="assets/plugins/jvectormap-content/world-mill.js"></script>
-<script src="assets/plugins/apexcharts/dist/apexcharts.min.js"></script>
-<script src="assets/js/demo/dashboard.demo.js"></script>
+<script src="assets/plugins/summernote/dist/summernote-lite.min.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="assets/plugins/blueimp-tmpl/js/tmpl.min.js"></script>
+<script src="assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
+<script src="assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
+<script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
+<script src="assets/plugins/tag-it/js/tag-it.min.js"></script>
+<script src="assets/js/demo/page-product-details.demo.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.7.0.min.js"
   integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
