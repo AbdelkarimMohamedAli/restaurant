@@ -431,12 +431,22 @@
 						
 					<div class="menu-divider"></div>
 					<div class="menu-header">ادارة المستخدمين</div>
+					@role('admin')
 					<div class="menu-item">
-						<a href="#" class="menu-link">
+						<a href="/roles" class="menu-link">
 							<span class="menu-icon"><i class="bi bi-menu-down"></i></span>
 							<div class="menu-text">الادوار</div>
 						</a>
 					</div>
+					@endrole
+					@role('admin')
+					<div class="menu-item">
+						<a href="/permissions" class="menu-link">
+							<span class="menu-icon"><i class="bi bi-menu-down"></i></span>
+							<div class="menu-text">الصلاحيات</div>
+						</a>
+					</div>
+					@endrole
 					<div class="menu-item">
 						<a href="/users" class="menu-link">
 							<span class="menu-icon"><i class="bi bi-people"></i></span>

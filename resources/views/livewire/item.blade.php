@@ -94,8 +94,12 @@
                             <ul id="tag-size" class="tagit form-control ui-widget ui-widget-content ui-corner-all">
                                 @if(is_array($variants))
                                 @foreach ($variants as $key=>$options)
-                                    <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable"><span class="tagit-label">{{$options['name']}}</span>
-                                        <a class="tagit-close" wire:click='removeVarint({{$key}})'><span class="text-icon">×</span><span class="ui-icon ui-icon-close"></span></a>
+                                    <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
+                                        <span class="tagit-label">{{$options['name']}}</span>
+                                        <a class="tagit-close" wire:click='removeVarint({{$key}})'>
+                                            <span class="text-icon">×</span>
+                                            <span class="ui-icon ui-icon-close"></span>
+                                        </a>
                                     </li> 
                                 @endforeach
                                 @endif
