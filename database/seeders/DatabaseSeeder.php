@@ -28,8 +28,9 @@ class DatabaseSeeder extends Seeder
         Matrial::create(['name'=>'دقيق','unit_id'=>'3','price'=>'15']);
         Matrial::create(['name'=>'شيبسي','unit_id'=>'1','price'=>'15']);
         Matrial::create(['name'=>'طماطم','unit_id'=>'2','price'=>'15']);
-
-        User::create(['name'=>'abdalla','email'=>'admin@gmail.com','password'=>Hash::make('12345678')]);
+        $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(AddonSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(ItemSeeder::class);
