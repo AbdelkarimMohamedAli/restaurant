@@ -20,30 +20,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-
+	
+	<link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <style>
-        *{
-            font-family: 'Cairo', sans-serif;
-        }
-        .btn-block {
-			display: block;
-			width: 100%;
-		}
-		.trans{
-			transition: all 0.5s ease-in-out;
-		}
-		.addon-select-o{
-			transition: all 0.3s ease-in-out;
-			height: auto;
-			transform: scaleY(1);
-		}
-		.addon-select-c{
-			transition: all 0.3s ease-in-out;
-			height: 0;
-			transform: scaleY(0);
-		}
-		.z-100{
-			z-index: 999 !important;
+        *{font-family: 'Cairo', sans-serif;}
+        .btn-block {display: block;width: 100%;}
+		.trans{transition: all 0.5s ease-in-out;}
+		.addon-select-o{transition: all 0.3s ease-in-out;height: auto;transform: scaleY(1);}
+		.addon-select-c{transition: all 0.3s ease-in-out;height: 0;transform: scaleY(0);}
+		.pointer{
+			cursor: pointer;
 		}
     </style>
 	
@@ -365,8 +351,8 @@
 					</div>
 					<div class="menu-divider"></div>
 					<div class="menu-header">الطاولات</div>
-					<div class="menu-item">
-						<a href="#" class="menu-link">
+					<div class="menu-item {{(request()->routeIs('tables')) ? 'active' :''}}">
+						<a href="/tables" class="menu-link">
 							<span class="menu-icon"><i class="bi bi-grid-3x3"></i></span>
 							<div class="menu-text">قائمة الطاولات</div>
 						</a>
@@ -527,46 +513,38 @@
 	</div>
 <!-- ================== BEGIN core-js ================== -->
 
-<script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/app.min.js"></script>
-<!-- ================== END core-js ================== -->
+	<!-- ================== BEGIN core-js ================== -->
+	<script src="assets/js/vendor.min.js"></script>
+	<script src="assets/js/app.min.js"></script>
+	<!-- ================== END core-js ================== -->
+	
+	<!-- ================== BEGIN page-js ================== -->
+	<script src="assets/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
+	<script src="assets/plugins/jvectormap-content/world-mill.js"></script>
+	<script src="assets/plugins/apexcharts/dist/apexcharts.min.js"></script>
+	<script src="assets/js/demo/dashboard.demo.js"></script>
+	<script src="assets/select2/js/jquery.js"></script>
+	<script src="assets/select2/js/select2.min.js"></script>
 
-<!-- ================== BEGIN page-js ================== -->
-<script src="assets/plugins/summernote/dist/summernote-lite.min.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="assets/plugins/blueimp-tmpl/js/tmpl.min.js"></script>
-<script src="assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
-<script src="assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"></script>
-<script src="assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-<script src="assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
-<script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
-<script src="assets/plugins/tag-it/js/tag-it.min.js"></script>
-<script src="assets/js/demo/page-product-details.demo.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.7.0.min.js"
-  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-  crossorigin="anonymous"></script>
 <!-- ================== END page-js ================== -->
 <livewire:scripts />
-@stack('modals')
-<script>
+@stack('scripts')
+<script >
 	window.addEventListener('show-form',event=>{
 		$(event.detail.modalId).modal(event.detail.actionModal)
 	})
-	window.addEventListener('collapse',event=>{
+	window.addEventListener('collapsed',event=>{
 		$(event.detail.modalId).collapse(event.detail.actionModal)
 	})
-	window.addEventListener('canc-form',event=>{
-		$(event.detail.modalId).collapse(event.detail.actionModal)
+	
+	window.addEventListener('dropdown',event=>{
+		$(event.detail.modalId).dropdown(event.detail.actionModal)
 	})
-
+	$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+	});
+	
+	
 	
 </script>
 </body>

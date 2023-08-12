@@ -18,14 +18,26 @@ class Item extends Component
     use WithFileUploads;
     use WithPagination;
     protected $paginationTheme='bootstrap';
+    protected $listeners = [
+        'getLatitudeForInput'
+   ];
+   //
+   public $latitud;
+   public function getLatitudeForInput($value)
+   {
+       if(!is_null($value))
+           $this->latitud = $value;
+   }
 
     public $formstatus=true;
     public $toggleModel=false;
     public $names,$discreption,$item_id,$price,$category=0,$discount,$discountType,$image,$imgurl,$isImage=false;
-    public $variant,$option,$optionPrice;
-    public $variants=[],$addons_s=[],$matrial_s=[];
-    public $addonselect=false,$matrialSelect=false;
+    public $variant,$option,$optionPrice,$inputstill='';
+    public $variants=[],$addons_s=[],$matrial_s=[],$option_matrials=[];
+    public $variant_id=0,$option_id=0;
+    public $addonselect=false,$matrialSelect=false,$matrials_form='';
     public $search='',$Msearch='';
+    public $opm_id=0,$opm_qty;
     
     protected $rules=[
         'names'=>'required',
@@ -46,6 +58,8 @@ class Item extends Component
     // render Componenets
     public function render()
     {
+
+
         // if($this->image){    
         //     dd($this->image);
         // }
@@ -98,6 +112,14 @@ class Item extends Component
         ];
         array_push($this->addons_s,$addon);
     }
+    public function stillshow($id1,$id2){
+        $this->variant_id=$id1;
+        $this->option_id=$id2;
+        $this->option_matrials= $this->variants[$id1]['array'][$id2]['matrials'];
+        $this->matrials_form='show';
+        // dd($this->option_matrials);
+ 
+    }
     
     public function removeAddons($id){
         unset($this->addons_s[$id]);
@@ -131,6 +153,7 @@ class Item extends Component
         $data=[
             'name'=>$this->option,
             'price'=>$this->optionPrice,
+            'matrials'=>array()
         ];
         array_push($this->variants[$id]['array'],$data);
         
@@ -178,6 +201,9 @@ class Item extends Component
         $this->reseti();
     }
     public function updateItem($id){
+
+        // $imageName=Random::generate(10).'.'.$this->image->extension();
+        // $this->image->storeAs('image_uploads', $imageName);
         $item=ModelsItem::find($id);
         $item->name= $this->names;
         $item->category_id=$this->category;
@@ -188,6 +214,10 @@ class Item extends Component
         $item->variant=$this->variants;
         $item->matrials=$this->matrial_s;
         $item->description=$this->discreption;
+        // if(file_exists('uploads/image_uploads/'.$item->img)){
+        //     unlink('uploads/image_uploads/'.$item->img);
+        // }
+        // $item->img=$imageName;
         $item->save();
         // alert()->success('Title','Lorem Lorem Lorem');
         session()->flash('message', 'تمت التعديل بنجاح');
@@ -234,5 +264,42 @@ class Item extends Component
     }
     public function stauts(){
         $this->isImage=true;
+    }
+    public function addoptionMatrial($id){
+        $matrial=Matrial::query()->find($id);
+        $matrialdata=[
+            'id'=>$matrial->id,
+            'name'=>$matrial->name,
+            'price'=>$matrial->price,
+            'qty'=>'',
+        ];
+        // $this->option_matrials
+        array_push($this->option_matrials,$matrialdata);
+
+    }
+    public function open(){
+        $this->dispatchBrowserEvent('canc-offcanvas',['modalId'=>'#form2','actionModal'=>'show']);
+    }
+    public function close_opm(){
+        $this->matrials_form='';
+    }
+    public function addOPM(){
+        $matrial=Matrial::find($this->opm_id);
+        $data=[
+            'id'=>$matrial->id,
+            'name'=>$matrial->name,
+            'price'=>$matrial->price,
+            'unit'=>$matrial->unit->name,
+            'qty'=>$this->opm_qty
+        ];
+        array_push($this->option_matrials,$data);
+        // dd($this->option_matrials);
+    }
+    public function deleteOPM($id){
+        unset($this->option_matrials[$id]);
+    }
+    public function saveOPM(){
+       $this->variants[$this->variant_id]['array'][$this->option_id]['matrials']=$this->option_matrials;
+        $this->updateItem($this->item_id);
     }
 }

@@ -16,7 +16,7 @@ class ItemSeeder extends Seeder
     {
         $faker=Factory::create();
         $variant=[['name'=>'size',
-                'array'=>[['name'=>'L','price'=>'10'],['name'=>'M','price'=>'5'],['name'=>'S','price'=>'0']],
+                'array'=>[['name'=>'L','price'=>'10','matrials'=>[]],['name'=>'M','price'=>'5','matrials'=>[]],['name'=>'S','price'=>'0','matrials'=>[]]],
                 ],['name'=>'type',
                   'array'=>[['name'=>'SOS','price'=>'0'],['name'=>'NOR','price'=>'0']],
                 ]

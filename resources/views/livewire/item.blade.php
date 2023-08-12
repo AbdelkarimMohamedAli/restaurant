@@ -118,11 +118,17 @@
                                     </div>
                                     @foreach ($options['array'] as $key2=>$itams)
                                     <div class="col-5">{{$itams['name']}}</div>
-                                    <div class="col-5">{{$itams['price']}}</div>
+                                    <div class="col-4">{{$itams['price']}}</div>
+                                    <div class="col-1">
+                                        <a class="text-white pointer" wire:click='stillshow({{$key}},{{$key2}})'>
+                                         <i class="bi bi-grid-3x3-gap nav-icon"></i>
+                                        </a>
+                                    </div>
                                     <div class="col-2">
                                         <a href="#" class="btn  d-block" wire:click='removeoptions({{$key}},{{$key2}})'>
                                         <i class="far fa-lg fa-fw me-2 fa-window-close" ></i></a>
                                     </div>
+
                                     @endforeach
                                 </div>
                             </div>
@@ -319,4 +325,65 @@
             </div>
         </div>
     </div>
+   
+    {{-- نافذة اضافة الخامات option --}}
+    <div class="offcanvas offcanvas-start {{$matrials_form}}" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="form2" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">تحديد الخامة {{$variants?$variants[$variant_id]['name']:''}}=>{{$variants?$variants[$variant_id]['array'][$option_id]['name']:''}}</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" wire:click="close_opm"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="row" >
+                <div class="col-6" wire:ignore>
+                    <x-inputs.select2 model='opm_id' id='slecting' placeholder="اختر الخامه">
+                        <option value="0" >اختر الخامه</option>
+                        @foreach ($matrials as $matrial)
+                        <option value="{{$matrial['id']}}">{{$matrial['name']}}</option>
+                        @endforeach
+                    </x-inputs.select2>
+                </div>
+                <div class="col-6">
+                    <input type="text"wire:model='opm_qty' class="form-control" wire:keydown.enter='addOPM' placeholder="choose">
+                </div>
+                <div class="col-6" >
+                    <div id="collapseTwos" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="" >
+                        <div class="accordion-body">
+                            <div class="list-group" >
+                                @foreach ($matrials as $matrial)
+                                    <a href="#" class="list-group-item list-group-item-action" wire:click='addoptionMatrial({{$matrial['id']}})'>
+                                        {{$matrial['name']}}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            <h1>matrial</h1>
+            <div class="row">
+                @if ($option_matrials)    
+                    @foreach ($option_matrials as $key=>$opm)
+                        <div class="col-4">{{$opm['name']}}</div>
+                        <div class="col-3">{{$opm['unit']}}</div>
+                        <div class="col-3">{{$opm['qty']}}</div>
+                        <div class="col-2" style="cursor: pointer" wire:click='deleteOPM({{$key}})'>x</div>
+                    @endforeach
+                @endif
+                <div class="col-12 my-3">
+                    <button class="btn btn-outline-theme w-100" wire:click='saveOPM()'>حفظ الخامات</button>
+                </div>
+            </div>
+
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        window.addEventListener('canc-offcanvas',event=>{
+		    $(event.detail.modalId).offcanvas(event.detail.actionModal);
+	    });
+        
+        
+    </script>
 </div>
