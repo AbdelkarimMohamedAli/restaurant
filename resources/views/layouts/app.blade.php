@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-
+	<link rel="stylesheet" href="assets/select2/css/select2.min.css">
     <style>
         *{
             font-family: 'Cairo', sans-serif;
@@ -44,6 +44,9 @@
 		}
 		.z-100{
 			z-index: 999 !important;
+		}
+		.pointer{
+			cursor: pointer;
 		}
     </style>
 	
@@ -558,13 +561,17 @@
 <script src="assets/plugins/jquery-migrate/dist/jquery-migrate.min.js"></script>
 <script src="assets/plugins/tag-it/js/tag-it.min.js"></script>
 <script src="assets/js/demo/page-product-details.demo.js"></script>
-<script
+{{-- <script
   src="https://code.jquery.com/jquery-3.7.0.min.js"
   integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> --}}
+<script src="assets/js/demo/dashboard.demo.js"></script>
+<script src="assets/select2/js/jquery.js"></script>
+<script src="assets/select2/js/select2.min.js"></script>
 <!-- ================== END page-js ================== -->
 <livewire:scripts />
 @stack('modals')
+@stack('scripts')
 <script>
 	window.addEventListener('show-form',event=>{
 		$(event.detail.modalId).modal(event.detail.actionModal)
@@ -575,8 +582,6 @@
 	window.addEventListener('canc-form',event=>{
 		$(event.detail.modalId).collapse(event.detail.actionModal)
 	})
-
-	
 </script>
 </body>
 </html>
