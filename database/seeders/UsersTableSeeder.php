@@ -21,6 +21,12 @@ class UsersTableSeeder extends Seeder
             'password'  =>bcrypt('12345678'),
             'image'     => 'users/03.jpg'
         ])->assignRole(['admin','cooker']);
+        User::create([
+            'name'      =>'abdallah',
+            'email'     =>'admin@gmail.com',
+            'password'  =>bcrypt('12345678'),
+            'image'     => 'users/02.jpg'
+        ])->assignRole(['admin','cooker']);
 
         $faker = Factory::create();
 
