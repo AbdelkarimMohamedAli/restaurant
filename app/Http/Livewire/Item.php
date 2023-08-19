@@ -202,8 +202,7 @@ class Item extends Component
     }
     public function updateItem($id){
 
-        // $imageName=Random::generate(10).'.'.$this->image->extension();
-        // $this->image->storeAs('image_uploads', $imageName);
+        
         $item=ModelsItem::find($id);
         $item->name= $this->names;
         $item->category_id=$this->category;
@@ -216,8 +215,10 @@ class Item extends Component
         $item->description=$this->discreption;
         // if(file_exists('uploads/image_uploads/'.$item->img)){
         //     unlink('uploads/image_uploads/'.$item->img);
+        //     $imageName=Random::generate(10).'.'.$this->image->extension();
+        //     $this->image->storeAs('image_uploads', $imageName);
+        //     $item->img=$imageName;
         // }
-        // $item->img=$imageName;
         $item->save();
         // alert()->success('Title','Lorem Lorem Lorem');
         session()->flash('message', 'تمت التعديل بنجاح');
@@ -300,6 +301,15 @@ class Item extends Component
     }
     public function saveOPM(){
        $this->variants[$this->variant_id]['array'][$this->option_id]['matrials']=$this->option_matrials;
-        $this->updateItem($this->item_id);
+        // $this->updateItem($this->item_id);
+        if($this->formstatus){
+            // ...
+        }else{
+        $item=ModelsItem::find($this->item_id);
+        $item->variant=$this->variants;
+        $item->save();
+        }
+        $this->toggleModel='show';
+        $this->close_opm();
     }
 }

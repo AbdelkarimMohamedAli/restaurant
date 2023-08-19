@@ -357,8 +357,8 @@
 							<div class="menu-text">قائمة الطاولات</div>
 						</a>
 					</div>
-					<div class="menu-item">
-						<a href="#" class="menu-link">
+					<div class="menu-item {{(request()->routeIs('booktables')) ? 'active' :''}}">
+						<a href="/booktables" class="menu-link">
 							<span class="menu-icon"><i class="bi bi-grid-3x3"></i></span>
 							<div class="menu-text">حجوزات الطاولات</div>
 						</a>

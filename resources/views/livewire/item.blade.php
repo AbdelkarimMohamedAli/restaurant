@@ -327,9 +327,10 @@
     </div>
    
     {{-- نافذة اضافة الخامات option --}}
+   
     <div class="offcanvas offcanvas-start {{$matrials_form}}" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="form2" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">تحديد الخامة {{$variants?$variants[$variant_id]['name']:''}}=>{{$variants?$variants[$variant_id]['array'][$option_id]['name']:''}}</h5>
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel">تحديد الخامة {{empty($variants)?'':$variants[$variant_id]['name']}}=>{{empty($variants[$variant_id]['array'])?'':$variants[$variant_id]['array'][$option_id]['name']}}</h5>
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" wire:click="close_opm"></button>
         </div>
         <div class="offcanvas-body">

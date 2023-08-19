@@ -6,12 +6,12 @@
 
 @push('scripts')
 <script>
-$(document).ready(function() {
-    $('#{{$id}}').select2().on('change',function(e){
-        var data = $('#{{$id}}').select2("val");
-        @this.set('{{$model}}',data)
+    $(document).ready(function() {
+        $('#{{$id}}').select2().on('change',function(e){
+            var data = $('#{{$id}}').select2("val");
+            @this.set('{{$model}}',data)
+        });
     });
-});
 </script>
 @endpush
 

@@ -47,7 +47,7 @@
                                         @error('unit_id') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="validationSelectInvalid" class="form-label">سعر الخامه</label>
+                                        <label for="validationInvalidInput" class="form-label">سعر الخامه</label>
                                         <input type="text" wire:model="price" class="form-control is-invalid" id="validationInvalidInput" value="" required>
                                         @error('price') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -90,7 +90,7 @@
                                 <th scope="col">السعر</th>
                                 <th scope="col">Actions</th>
                             </tr>
-                        </thead>
+                        </thead> 
                         <tbody>
                             @foreach ($matrials as $matrial)
                             <tr>

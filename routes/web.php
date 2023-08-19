@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Addon;
+use App\Http\Livewire\BookTable;
 use App\Http\Livewire\Category;
 use App\Http\Livewire\Item;
 use App\Http\Livewire\Matrial;
@@ -30,6 +31,7 @@ Route::get('items',Item::class)->name('items')->middleware('auth');
 Route::get('addons',Addon::class)->name('addons')->middleware('auth');
 Route::get('categories',Category::class)->name('categories')->middleware('auth');
 Route::get('tables',Table::class)->name('tables')->middleware('auth');
+Route::get('booktables',BookTable::class)->name('booktables')->middleware('auth');
 Route::get('users',User::class)->name('users')->middleware('auth');
 Route::get('login',function () {
     return view('login');

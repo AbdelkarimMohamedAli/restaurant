@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
-    use Search;
+     
     protected $fillable=['name','price','category_id','discount','discount_type','addons','user_id','description','img','variant','matrials'];
 
     public function category() {
